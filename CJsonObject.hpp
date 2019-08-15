@@ -45,7 +45,6 @@ public:     // method of ordinary json object or json array
 
     CJsonObject& operator=(const CJsonObject& oJsonObject);
     bool operator==(const CJsonObject& oJsonObject) const;
-    bool StrictEqual(const CJsonObject& oJsonObject) const;
     bool Parse(const std::string& strJson);
     void Clear();
     bool IsEmpty() const;

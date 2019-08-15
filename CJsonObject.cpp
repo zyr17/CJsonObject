@@ -59,11 +59,6 @@ CJsonObject& CJsonObject::operator=(const CJsonObject& oJsonObject)
 
 bool CJsonObject::operator==(const CJsonObject& oJsonObject) const
 {
-    return(this->ToString() == oJsonObject.ToString());
-}
-
-bool CJsonObject::StrictEqual(const CJsonObject& oJsonObject) const
-{
     auto cj1 = GetcJSONRef(), cj2 = oJsonObject.GetcJSONRef();
     if (cj1 == NULL || cj2 == NULL) return false;
     if (cj1 -> type != cj2 -> type) return false;
@@ -74,7 +69,7 @@ bool CJsonObject::StrictEqual(const CJsonObject& oJsonObject) const
     if (cj1 -> type == cJSON_Int) return cj1 -> valueint == cj2 -> valueint;
     if (cj1 -> type == cJSON_Double) return cj1 -> valuedouble == cj2 -> valuedouble;
     if (cj1 -> type == cJSON_String) return strcmp(cj1 -> valuestring, cj2 -> valuestring) == 0;
-    return *this == oJsonObject;
+    return(this->ToString() == oJsonObject.ToString());
 }
 
 bool CJsonObject::AddEmptySubObject(const std::string& strKey)
