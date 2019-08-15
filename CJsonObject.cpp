@@ -177,6 +177,11 @@ bool CJsonObject::GetKey(std::string& strKey)
     }
 }
 
+void CJsonObject::ResetTraversing()
+{
+    m_itKey = m_listKeys.begin();
+}
+
 CJsonObject& CJsonObject::operator[](const std::string& strKey)
 {
     std::map<std::string, CJsonObject*>::iterator iter;
