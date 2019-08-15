@@ -17,6 +17,7 @@
 #include <errno.h>
 #include <limits.h>
 #include <math.h>
+#include <string.h>
 #include <string>
 #include <map>
 #include <list>
