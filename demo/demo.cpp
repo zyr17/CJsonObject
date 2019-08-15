@@ -1,15 +1,14 @@
-#include <mcheck.h>
 #include <string>
 #include <iostream>
 #include "../CJsonObject.hpp"
 
 int main()
 {
-    mtrace();
     int iValue;
     double fTimeout;
     std::string strValue;
     neb::CJsonObject oJson("{\"refresh_interval\":60,"
+                        "\"test_float\":[18.0, 10.0, 5.0],"
                         "\"timeout\":12.5,"
                         "\"dynamic_loading\":["
                             "{"
@@ -70,13 +69,26 @@ int main()
      std::string strTraversing;
      while(oJson["dynamic_loading"][0].GetKey(strTraversing))
      {
-         std::cout << strTraversing << std::endl;
+         std::cout << "traversing:  " << strTraversing << std::endl;
      }
      std::cout << "---------------add a new key, then key traverse---------------------" << std::endl;
      oJson["dynamic_loading"][0].Add("new_key", "new_value");
      while(oJson["dynamic_loading"][0].GetKey(strTraversing))
      {
-         std::cout << strTraversing << std::endl;
+         std::cout << "traversing:  " << strTraversing << std::endl;
      }
+
+     std::cout << oJson["test_float"].GetArraySize() << std::endl;
+     float fTestValue = 0.0;
+     for (int i = 0; i < oJson["test_float"].GetArraySize(); ++i)
+     {
+         oJson["test_float"].Get(i, fTestValue);
+         std::cout << fTestValue << std::endl;
+     }
+     oJson.AddNull("null_value");
+     std::cout << oJson.IsNull("test_float") << "\t" << oJson.IsNull("null_value") << std::endl;
+     oJson["test_float"].AddNull();
+     std::cout << oJson.ToString() << std::endl;
+
 }
 
